@@ -21,8 +21,14 @@ export default createStore({
       commit("setUsers", response.data);
     },
 
+    async fetchUsersByName({ commit }, name) {
+      const response = await axios.get(`${URL}/${name}`);
+
+      commit("setUsers", response.data);
+    },
+
     async addUser({ commit }, user) {
-      const response = await axios.post(URL, user );
+      const response = await axios.post(URL, user);
       commit("newUser", response.data);
     },
 
@@ -31,39 +37,29 @@ export default createStore({
       commit("removeUser", id);
     },
 
-    // async updateTodo({ commit }, updatedTodo) {
-    //   const response = await axios.put(
-    //     `http://localhost:5000/users/${updatedTodo.id}`,
-    //     updatedTodo
-    //   );
+    async updateUser({ commit }, updatedUser) {
+      const response = await axios.put(
+        `http://localhost:5000/users/${updatedUser._id}`,
+        updatedUser
+      );
 
-    //   commit("updateTodo", response.data);
-    // },
+      commit("updateUser", response.data);
+    },
   },
 
   mutations: {
     setUsers: (state, users) => (state.users = users),
     newUser: (state, user) => state.users.push(user),
     removeUser: (state, id) =>
-      (state.users = state.users.filter((user) => user.id !== id)),
-    // updateTodo: (state, updatedTodo) => {
-    //   // Find index
-    //   const index = state.todos.findIndex((todo) => todo.id === updatedTodo.id);
+      (state.users = state.users.filter((user) => user._id !== id)),
+    updateUser: (state, updatedUser) => {
+      // Find index
+      const index = state.users.findIndex((user) => user.id === updatedUser.id);
 
-    //   if (index !== -1) {
-    //     state.todos.splice(index, 1, updatedTodo);
-    //   }
-    // },
+      if (index !== -1) {
+        state.users.splice(index, 1, updatedUser);
+      }
+    },
   },
   modules: {},
 });
-
-
-{/* <div class="row justify-content-around">
-    <div class="col-4">
-      One of two columns
-    </div>
-    <div class="col-4">
-      One of two columns
-    </div>
-  </div> */}

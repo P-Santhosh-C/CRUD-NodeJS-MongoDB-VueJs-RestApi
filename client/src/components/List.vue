@@ -2,8 +2,9 @@
   <div>
     <div>
       <h3>Search</h3>
-      <input type="text" v-model="search" placeholder="Search Name..." />
-    </div><br />
+      <input type="text" @change="fetchUsersByName(search)" v-model="search" placeholder="Search Name..." />
+    </div>
+    <br />
     <div class="row justify-content-around">
       <div class="col-3" v-for="user in allUsers" :key="user._id">
         <div class="card">
@@ -29,7 +30,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchUsers", "deleteUser"]),
+    ...mapActions(["fetchUsers", "fetchUsersByName", "deleteUser"]),
   },
   computed: mapGetters(["allUsers"]),
   created() {
@@ -37,3 +38,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+  color: aliceblue;
+  background-color: black;
+}
+</style>
