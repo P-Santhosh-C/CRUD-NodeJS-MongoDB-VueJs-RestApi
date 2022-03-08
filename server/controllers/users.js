@@ -15,15 +15,13 @@ export const getUsers = async (req, res) => {
   }
 };
 
-export const getuser = async (req, res) => {
-  const { id } = req.params;
-
+export const getuserbyname = async (req, res) => {
+  var name = new RegExp(req.params.name);
   try {
-    const user = await UsersModel.findById(id);
-
+    const user = await UsersModel.find({ name: name });
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    console.log(error);
   }
 };
 
@@ -46,7 +44,7 @@ export const createUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { cell} = req.body;
+  const { cell } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);

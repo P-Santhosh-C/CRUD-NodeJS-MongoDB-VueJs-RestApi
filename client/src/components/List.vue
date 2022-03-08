@@ -3,31 +3,20 @@
     <div>
       <h3>Search</h3>
       <input type="text" v-model="search" placeholder="Search Name..." />
+    </div><br />
+    <div class="row justify-content-around">
+      <div class="col-3" v-for="user in allUsers" :key="user._id">
+        <div class="card">
+          <h4>Name:{{ user.name }}</h4>
+          <h4>Email:{{ user.email }}</h4>
+          <h4>cell:{{ user.cell }}</h4>
+          <h4>Location:{{ user.location }}</h4>
+          <button class="btn btn-danger" v-on:click="deleteUser(user._id)">
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Name</th>
-          <th>Cell</th>
-          <th>Email</th>
-          <th>Location</th>
-          <th>actions</th>
-        </tr>
-      </thead>
-      <tbody v-for="(user, index) in allUsers" :key="user._id">
-        <tr>
-          <td>{{ index + 1 }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.cell }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.location }}</td>
-          <td>
-            <button class="primary" v-on:click="deleteUser(user._id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 

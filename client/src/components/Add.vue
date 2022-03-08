@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br />
     <h3>Add Todo</h3>
     <div class="add">
       <form @submit="onSubmit">
@@ -10,6 +11,7 @@
         <input type="submit" value="Submit" />
       </form>
     </div>
+    <br />
   </div>
 </template>
 
