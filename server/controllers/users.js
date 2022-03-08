@@ -46,12 +46,12 @@ export const createUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { password, cell, selectedFile, tags } = req.body;
+  const { cell} = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
 
-  const updatedPost = { email, cell, _id: id };
+  const updatedPost = { cell, _id: id };
 
   await UsersModel.findByIdAndUpdate(id, updatedPost, { new: true });
 
