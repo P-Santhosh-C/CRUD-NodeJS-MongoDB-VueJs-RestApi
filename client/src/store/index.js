@@ -1,37 +1,34 @@
 import { createStore } from "vuex";
 import axios from "axios";
 
+const URL = "http://localhost:5000/users";
+
 export default createStore({
   state: {
-    todos: [],
+    users: [],
   },
 
   getters: {
-    allTodos: (state) => {
-      return state.todos;
+    allUsers: (state) => {
+      return state.users;
     },
   },
 
   actions: {
-    async fetchTodos({ commit }) {
-      const response = await axios.get("http://localhost:5000/users");
+    async fetchUsers({ commit }) {
+      const response = await axios.get(URL);
 
-      commit("setTodos", response.data);
+      commit("setUsers", response.data);
     },
 
-    // async addTodo({ commit }, title) {
-    //   const response = await axios.post("http://localhost:5000/users", {
-    //     title,
-    //     completed: false,
-    //   });
+    async addUser({ commit }, user) {
+      const response = await axios.post(URL, user );
+      commit("newUser", response.data);
+    },
 
-    //   commit("newTodo", response.data);
-    // },
-
-    async deleteTodo({ commit }, id) {
-      await axios.delete(`http://localhost:5000/users/${id}`);
-
-      commit("removeTodo", id);
+    async deleteUser({ commit }, id) {
+      await axios.delete(`${URL}/${id}`);
+      commit("removeUser", id);
     },
 
     // async updateTodo({ commit }, updatedTodo) {
@@ -44,15 +41,11 @@ export default createStore({
     // },
   },
 
-  // posts.map((post) =>
-  //       post._id === action.payload._id ? action.payload : post
-  //     );
-
   mutations: {
-    setTodos: (state, todos) => (state.todos = todos),
-    // newTodo: (state, todo) => state.users.unshift(todo),
-    removeTodo: (state, id) =>
-      (state.todos = state.todos.filter((todo) => todo.id !== id)),
+    setUsers: (state, users) => (state.users = users),
+    newUser: (state, user) => state.users.push(user),
+    removeUser: (state, id) =>
+      (state.users = state.users.filter((user) => user.id !== id)),
     // updateTodo: (state, updatedTodo) => {
     //   // Find index
     //   const index = state.todos.findIndex((todo) => todo.id === updatedTodo.id);

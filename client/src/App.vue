@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Add />
     <List />
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -11,11 +12,13 @@
 
 <script>
 import List from "./components/List.vue";
+import Add from "./components/Add.vue"
 
 export default {
   name: "Home",
   components: {
     List,
+    Add
   },
 };
 </script>
