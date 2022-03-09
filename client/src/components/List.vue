@@ -2,7 +2,12 @@
   <div>
     <div>
       <h3>Search</h3>
-      <input type="text" @change="fetchUsersByName(search)" v-model="search" placeholder="Search Name..." />
+      <input
+        type="text"
+        @change="fetchUsersByName(search)"
+        v-model="search"
+        placeholder="Search Name..."
+      />
     </div>
     <br />
     <div class="row justify-content-around">
@@ -12,6 +17,9 @@
           <h4>Email:{{ user.email }}</h4>
           <h4>cell:{{ user.cell }}</h4>
           <h4>Location:{{ user.location }}</h4>
+          <button class="btn btn-danger" v-on:click="edituser(user._id)">
+            Edit
+          </button>
           <button class="btn btn-danger" v-on:click="deleteUser(user._id)">
             Delete
           </button>
@@ -31,6 +39,7 @@ export default {
   },
   methods: {
     ...mapActions(["fetchUsers", "fetchUsersByName", "deleteUser"]),
+    adduser() {},
   },
   computed: mapGetters(["allUsers"]),
   created() {

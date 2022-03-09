@@ -38,6 +38,7 @@ export default createStore({
     },
 
     async updateUser({ commit }, updatedUser) {
+      console.log("hi");
       const response = await axios.put(
         `${URL}/${updatedUser._id}`,
         updatedUser
