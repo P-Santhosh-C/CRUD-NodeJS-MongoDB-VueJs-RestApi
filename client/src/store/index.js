@@ -39,7 +39,7 @@ export default createStore({
 
     async updateUser({ commit }, updatedUser) {
       const response = await axios.put(
-        `http://localhost:5000/users/${updatedUser._id}`,
+        `${URL}/${updatedUser._id}`,
         updatedUser
       );
 
