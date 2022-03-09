@@ -15,9 +15,10 @@ const routes = [
     component: Add,
   },
   {
-    path: "/edit",
+    path: "/edit/:id/e",
     name: "Edit",
     component: Edit,
+    params: true,
   },
 ];
 
